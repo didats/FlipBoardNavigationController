@@ -3,6 +3,11 @@ FlipBoardNavigationController
 
 This is a new navigation controller inspired by Flipboard.
 
+### Changes
+This fork is enable you to be able to remove the gesture based on your needs. It has the new method which will give you ability to enable it everytime you want to push the view controller.
+
+	[self.flipboardNavigationController pushViewController:anotherViewController withGesture:NO];
+
 
 # Usage
 

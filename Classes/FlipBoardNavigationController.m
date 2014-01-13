@@ -48,6 +48,7 @@ typedef enum {
     CGPoint _panOrigin;
     BOOL _animationInProgress;
     CGFloat _percentageOffsetFromLeft;
+    BOOL isNeedGesture;
 }
 
 - (void) addPanGestureToView:(UIView*)view;
@@ -83,6 +84,7 @@ typedef enum {
 - (void) loadView {
     [super loadView];
     CGRect viewRect = [self viewBoundsWithOrientation:self.interfaceOrientation];
+    isNeedGesture = NO;
    
     UIViewController *rootViewController = [self.viewControllers objectAtIndex:0];
     [rootViewController willMoveToParentViewController:self];
@@ -122,13 +124,20 @@ typedef enum {
             [viewController didMoveToParentViewController:self];
             _animationInProgress = NO;
             _gestures = [[NSMutableArray alloc] init];
-            [self addPanGestureToView:[self currentViewController].view];
+            
+            // is the user need the gesture?
+            if(isNeedGesture) [self addPanGestureToView:[self currentViewController].view];
             handler();
         }
     }];
 }
 
 - (void) pushViewController:(UIViewController *)viewController {
+    [self pushViewController:viewController completion:^{}];
+}
+
+- (void) pushViewController:(UIViewController *)viewController withGesture:(BOOL) gestureStatus {
+    isNeedGesture = NO;
     [self pushViewController:viewController completion:^{}];
 }
 

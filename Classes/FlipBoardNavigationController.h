@@ -37,6 +37,8 @@ typedef void (^FlipBoardNavigationControllerCompletionBlock)(void);
 
 - (void) pushViewController:(UIViewController *)viewController;
 - (void) pushViewController:(UIViewController *)viewController completion:(FlipBoardNavigationControllerCompletionBlock)handler;
+- (void) pushViewController:(UIViewController *)viewController withGesture:(BOOL) gestureStatus;
+
 - (void) popViewController;
 - (void) popViewControllerWithCompletion:(FlipBoardNavigationControllerCompletionBlock)handler;
 @end
